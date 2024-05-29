@@ -1,0 +1,43 @@
+name: pgadmin4
+base: core22
+version: '8.6'
+summary: Management tool for the PostgreSQL database
+description: |
+  pgAdmin is the leading Open Source management tool for Postgres, the world’s
+  most advanced Open Source database. pgAdmin 4 is designed to meet the needs
+  of both novice and experienced Postgres users alike, providing a powerful
+  graphical interface that simplifies the creation, maintenance and use of
+  database objects.
+
+grade: stable
+confinement: strict
+website: https://www.pgadmin.org
+
+package-repositories:
+  - type: apt
+    components: [main]
+    suites: [pgadmin4]
+    key-id: E8697E2EEF76C02D3A6332778881B2A8210976F2
+    url: https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/jammy
+
+
+apps:
+  pgadmin4:
+    command: usr/pgadmin4/bin/pgadmin4
+    extensions: [ gnome ]
+
+parts:
+  desktop:
+    plugin: nil
+    stage-packages:
+      - pgadmin4-desktop
+      - python3.10
+
+    override-pull: |
+      craftctl default
+      mkdir -p /root/parts/desktop/install/usr/lib
+      cp -a /usr/lib/python3.10 /root/parts/desktop/install/usr/lib
+      mkdir -p /root/parts/desktop/install/usr/bin
+      cp -a /usr/bin/python* /root/parts/desktop/install/usr/bin
+      cp -a /usr/bin/x86_64-linux-gnu-python3.10-config /root/parts/desktop/install/usr/bin
+      chmod +x /root/parts/desktop/install/usr/bin/*
