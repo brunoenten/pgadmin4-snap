@@ -24,6 +24,10 @@ package-repositories:
 apps:
   pgadmin4:
     command: usr/pgadmin4/bin/pgadmin4
+    plugs:
+      - network
+      - browser-support
+      - password-manager-service
     extensions: [ gnome ]
 
 parts:
@@ -41,3 +45,8 @@ parts:
       cp -a /usr/bin/python* /root/parts/desktop/install/usr/bin
       cp -a /usr/bin/x86_64-linux-gnu-python3.10-config /root/parts/desktop/install/usr/bin
       chmod +x /root/parts/desktop/install/usr/bin/*
+
+    override-build: |
+      craftctl default
+      rm /root/parts/desktop/install/usr/pgadmin4/venv/lib/python3.10/ensurepip
+
