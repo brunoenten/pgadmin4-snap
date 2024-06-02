@@ -1,6 +1,6 @@
 name: pgadmin4
-base: core22
-version: '8.6'
+base: core24
+version: '8.7'
 summary: Management tool for the PostgreSQL database
 description: |
   pgAdmin is the leading Open Source management tool for Postgres, the world’s
@@ -18,7 +18,7 @@ package-repositories:
     components: [main]
     suites: [pgadmin4]
     key-id: E8697E2EEF76C02D3A6332778881B2A8210976F2
-    url: https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/jammy
+    url: https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/noble
 
 
 apps:
@@ -35,18 +35,18 @@ parts:
     plugin: nil
     stage-packages:
       - pgadmin4-desktop
-      - python3.10
+      - python3.12
 
     override-pull: |
       craftctl default
       mkdir -p /root/parts/desktop/install/usr/lib
-      cp -a /usr/lib/python3.10 /root/parts/desktop/install/usr/lib
+      cp -a /usr/lib/python3.12 /root/parts/desktop/install/usr/lib
       mkdir -p /root/parts/desktop/install/usr/bin
       cp -a /usr/bin/python* /root/parts/desktop/install/usr/bin
-      cp -a /usr/bin/x86_64-linux-gnu-python3.10-config /root/parts/desktop/install/usr/bin
+      cp -a /usr/bin/x86_64-linux-gnu-python3.12-config /root/parts/desktop/install/usr/bin
       chmod +x /root/parts/desktop/install/usr/bin/*
 
     override-build: |
       craftctl default
-      rm /root/parts/desktop/install/usr/pgadmin4/venv/lib/python3.10/ensurepip
+      rm /root/parts/desktop/install/usr/pgadmin4/venv/lib/python3.12/ensurepip
 
