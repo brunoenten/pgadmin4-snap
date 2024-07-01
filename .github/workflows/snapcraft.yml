@@ -12,6 +12,8 @@ jobs:
     - uses: actions/checkout@v4
     - uses: snapcore/action-build@v1
       id: build
+      env:
+        SNAPCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS: 1
     - uses: snapcore/action-publish@v1
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}

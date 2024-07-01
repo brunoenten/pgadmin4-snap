@@ -1,6 +1,6 @@
 name: pgadmin4
 base: core24
-version: '8.7'
+version: '8.9'
 summary: Management tool for the PostgreSQL database
 description: |
   pgAdmin is the leading Open Source management tool for Postgres, the world’s
@@ -34,7 +34,7 @@ parts:
   desktop:
     plugin: nil
     stage-packages:
-      - pgadmin4-desktop
+      - pgadmin4-desktop=8.9
       - python3.12
 
     override-pull: |
